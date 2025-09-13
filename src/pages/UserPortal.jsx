@@ -2,6 +2,7 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import MenuCard from "../components/MenuCard";
 import Cart from "../components/Cart";
+import Footer from "../components/Footer";
 
 import cake from "../assets/cake.jpg";
 import icecream from "../assets/icecream.jpg";
@@ -29,13 +30,23 @@ function UserPortal() {
   ];
 
   const [cart, setCart] = useState([]);
+  const [orders, setOrders] = useState([]);
 
   const addToCart = (item) => setCart([...cart, item]);
   const removeFromCart = (item) => setCart(cart.filter((i) => i !== item));
 
   const handlePay = () => {
-    alert("✅ Simulated Razorpay: Payment Successful!");
-    // later: call backend → create order → save in MongoDB
+    const newOrder = {
+      id: orders.length + 1,
+      items: cart.map((i) => i.name),
+      total: cart.reduce((sum, i) => sum + i.price, 0),
+      status: "Paid",
+      date: new Date().toLocaleString(),
+    };
+
+    setOrders([newOrder, ...orders]);
+    setCart([]);
+    alert("✅ Payment Successful! Your order has been placed.");
   };
 
   return (
@@ -48,6 +59,39 @@ function UserPortal() {
         ))}
       </div>
       <Cart cartItems={cart} onRemove={removeFromCart} onPay={handlePay} />
+
+      {/* Past Orders Section */}
+      <div className="orders-section">
+        <h2>📜 Past Orders</h2>
+        {orders.length === 0 ? (
+          <p>No past orders</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Items</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.items.join(", ")}</td>
+                  <td>₹{order.total}</td>
+                  <td>{order.status}</td>
+                  <td>{order.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+      </div>
+
+      <Footer />
     </div>
   );
 }

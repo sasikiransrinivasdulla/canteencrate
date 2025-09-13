@@ -10,7 +10,6 @@ body {
   align-items: center;
   padding: 15px;
   background: #1a1a1a;
-  border-bottom: 2px solid #8a2be2;
 }
 
 .logo {
@@ -21,39 +20,38 @@ body {
 .title {
   text-align: center;
   margin: 20px 0;
-  color: #8a2be2;
 }
 
 .menu {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 15px;
   padding: 20px;
 }
 
 .menu-card {
   background: #1f1f1f;
-  padding: 15px;
-  border: 1px solid #8a2be2;
+  padding: 12px;
+  border: 1px solid #333;
   border-radius: 8px;
   text-align: center;
   transition: transform 0.2s;
 }
 
 .menu-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .menu-img {
   width: 100%;
-  height: 120px;
+  max-height: 100px;
   object-fit: cover;
   border-radius: 6px;
 }
 
 .menu-card button {
   margin-top: 10px;
-  background: #8a2be2;
+  background: #333;
   color: white;
   border: none;
   padding: 8px 12px;
@@ -62,13 +60,13 @@ body {
 }
 
 .menu-card button:hover {
-  background: #6a1bb0;
+  background: #555;
 }
 
 .cart {
   padding: 20px;
   background: #141414;
-  border-top: 2px solid #8a2be2;
+  border-top: 1px solid #333;
 }
 
 .cart ul {
@@ -86,7 +84,7 @@ body {
   margin-top: 15px;
   width: 100%;
   padding: 12px;
-  background: #8a2be2;
+  background: #333;
   border: none;
   color: white;
   font-size: 16px;
@@ -95,5 +93,29 @@ body {
 }
 
 .pay-btn:hover {
-  background: #6a1bb0;
+  background: #555;
+}
+
+.orders-section {
+  padding: 20px;
+}
+
+.orders-section table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1f1f1f;
+}
+
+.orders-section th,
+.orders-section td {
+  border: 1px solid #333;
+  padding: 8px;
+  text-align: center;
+}
+
+.footer {
+  text-align: center;
+  padding: 15px;
+  background: #1a1a1a;
+  margin-top: 20px;
 }
