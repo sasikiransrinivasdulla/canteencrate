@@ -31,8 +31,12 @@ function UserPortal() {
 
   const [cart, setCart] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [search, setSearch] = useState("");
+  const [showPayment, setShowPayment] = useState(false);
+  const [upiId, setUpiId] = useState("");
+  const [upiPin, setUpiPin] = useState("");
 
-  // ✅ Fetch past orders on page load
+  // ✅ Fetch past orders
   useEffect(() => {
     const fetchOrders = async () => {
       try {
@@ -51,8 +55,13 @@ function UserPortal() {
   const addToCart = (item) => setCart([...cart, item]);
   const removeFromCart = (item) => setCart(cart.filter((i) => i !== item));
 
-  // ✅ Save order to backend
-  const handlePay = async () => {
+  // ✅ Fake payment flow
+  const confirmPayment = async () => {
+    if (!upiId || !upiPin) {
+      alert("⚠️ Please enter UPI ID and PIN");
+      return;
+    }
+
     try {
       const response = await fetch(
         "https://canteen-backend-user.onrender.com/api/orders",
@@ -67,9 +76,12 @@ function UserPortal() {
       );
 
       const newOrder = await response.json();
-
       setOrders([newOrder, ...orders]);
       setCart([]);
+
+      setShowPayment(false);
+      setUpiId("");
+      setUpiPin("");
 
       alert("✅ Payment Successful! Your order has been placed.");
     } catch (err) {
@@ -78,20 +90,72 @@ function UserPortal() {
     }
   };
 
+  // 🔍 Filter menu by search
+  const filteredItems = menuItems.filter((item) =>
+    item.name.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <div>
       <Navbar />
       <h2 className="title">Canteen Menu</h2>
 
-      {/* Menu Items */}
+      {/* 🔍 Search Bar */}
+      <div className="search-bar">
+        <input
+          type="text"
+          placeholder="Search items..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      {/* Menu */}
       <div className="menu">
-        {menuItems.map((item, idx) => (
-          <MenuCard key={idx} item={item} onAddToCart={addToCart} />
-        ))}
+        {filteredItems.length > 0 ? (
+          filteredItems.map((item, idx) => (
+            <MenuCard key={idx} item={item} onAddToCart={addToCart} />
+          ))
+        ) : (
+          <p className="no-items">No items found</p>
+        )}
       </div>
 
       {/* Cart */}
-      <Cart cartItems={cart} onRemove={removeFromCart} onPay={handlePay} />
+      <Cart
+        cartItems={cart}
+        onRemove={removeFromCart}
+        onPay={() => setShowPayment(true)}
+      />
+
+      {/* Fake Payment Modal */}
+      {showPayment && (
+        <div className="payment-modal">
+          <div className="payment-box">
+            <h3>💳 UPI Payment</h3>
+            <p>Total: ₹{cart.reduce((sum, i) => sum + i.price, 0)}</p>
+            <input
+              type="text"
+              placeholder="Enter UPI ID"
+              value={upiId}
+              onChange={(e) => setUpiId(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Enter UPI PIN"
+              value={upiPin}
+              onChange={(e) => setUpiPin(e.target.value)}
+            />
+            <button onClick={confirmPayment}>Confirm Payment</button>
+            <button
+              className="cancel-btn"
+              onClick={() => setShowPayment(false)}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Past Orders */}
       <div className="orders-section">
