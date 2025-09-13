@@ -98,6 +98,8 @@ function UserPortal() {
   return (
     <div>
       <Navbar />
+      {/* Show available items count */}
+      <div className="available-items">Available Items: {menuItems.length}</div>
       <h2 className="title">Canteen Menu</h2>
 
       {/* 🔍 Search Bar */}

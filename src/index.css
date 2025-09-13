@@ -529,3 +529,14 @@ h3 {
 .cancel-btn:hover {
   background: #c22;
 }
+.available-items {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: #1f1f1f;
+  padding: 8px 14px;
+  border-radius: 8px;
+  color: #eee;
+  font-size: 14px;
+  border: 1px solid #333;
+}
