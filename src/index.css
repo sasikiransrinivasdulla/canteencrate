@@ -1,0 +1,99 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #0d0d0d;
+  color: #eee;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  background: #1a1a1a;
+  border-bottom: 2px solid #8a2be2;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.title {
+  text-align: center;
+  margin: 20px 0;
+  color: #8a2be2;
+}
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  padding: 20px;
+}
+
+.menu-card {
+  background: #1f1f1f;
+  padding: 15px;
+  border: 1px solid #8a2be2;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.menu-card:hover {
+  transform: scale(1.05);
+}
+
+.menu-img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.menu-card button {
+  margin-top: 10px;
+  background: #8a2be2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.menu-card button:hover {
+  background: #6a1bb0;
+}
+
+.cart {
+  padding: 20px;
+  background: #141414;
+  border-top: 2px solid #8a2be2;
+}
+
+.cart ul {
+  list-style: none;
+  padding: 0;
+}
+
+.cart li {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.pay-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #8a2be2;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pay-btn:hover {
+  background: #6a1bb0;
+}
