@@ -4,7 +4,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <img src={logo} alt="canteen logo" className="logo" />
-      <h1>Smart Canteen (PrePay)</h1>
+      <h1>Smart Canteen (Canteen Crate)</h1>
     </nav>
   );
 }
